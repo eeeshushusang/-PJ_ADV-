@@ -1,0 +1,75 @@
+body {
+  height: 100vh; /* 覆盖全屏 */
+  background: url('../image/bg2.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #3f3f3f; /* 更亮的文字颜色以提高可读性 */
+  font-family: 'Roboto', sans-serif;
+}
+
+ul {
+  list-style: none; /* 移除默认列表符号 */
+  padding: 0;
+}
+
+li {
+  margin: 10px 0; /* 增加列表项间的间距 */
+}
+
+a {
+  background-color: rgba(255, 255, 255, 0.8); /* 半透明背景提升可读性 */
+  color: #0056b3; /* 蓝色文字提供足够对比 */
+  padding: 8px 16px; /* 减少内边距大小 */
+  border-radius: 15px; /* 减小圆角大小 */
+  text-decoration: none;
+  transition: background-color 0.3s ease; /* 平滑过渡效果 */
+  display: inline-block; /* 确保可以应用边距和大小调整 */
+  margin: 5px; /* 调整间距以防重叠 */
+}
+
+a:hover {
+  background-color: rgba(255, 255, 255, 1); /* 鼠标悬停时背景色更白 */
+}
+
+h1 {
+  color: #ffffff; /* 标题使用白色字体 */
+  text-shadow: 2px 2px 4px #000000; /* 文字阴影增加可读性 */
+  margin-bottom: 20px; /* 增加与下方元素的间距 */
+}
+
+.form-login {
+  max-width: 250px; /* 进一步缩小表单宽度 */
+  padding: 15px; /* 减少填充以缩小整体尺寸 */
+  border-radius: 6px; /* 更微妙的圆角 */
+}
+
+/* 其他样式维持不变 */
+
+
+.form-control {
+  margin-bottom: 10px; /* 增加控件间距 */
+  border: 2px solid #42aaff; /* 边框颜色 */
+  background-color: #00000050; /* 轻微透明的黑色背景 */
+  color: #ffffff; /* 输入文字颜色 */
+}
+
+.form-control:focus {
+  border-color: #ffffff; /* 聚焦时白色边框 */
+  background-color: #00000080; /* 更深的背景色 */
+}
+
+button {
+  width: 100%;
+  background-color: #42aaff; /* 按钮颜色 */
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #3088ee; /* 鼠标悬停时变化颜色 */
+}

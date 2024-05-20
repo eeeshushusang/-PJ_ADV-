@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'adv/css/comments.css' %}" rel="stylesheet" />
+
+    <style>
+        body {
+            overflow-y: auto;
+        }
+
+        .cursor {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-image: url("{% static 'goat1.gif' %}");
+            background-size: cover;
+            pointer-events: none;
+            z-index: 1000;
+            transition: width 0.2s, height 0.2s;
+        }
+    </style>
+
+    <title>首页</title>
+</head>
+<body>
+    <h1>欢迎来到ADV评价系统</h1>
+    <ul>
+        <li><a href="{% url 'update_adv' %}">添加ADV信息</a></li>
+        <li><a href="{% url 'update_club' %}">添加CLUB信息</a></li>
+        <li><a href="{% url 'comments' %}">评价ADV</a></li>
+        <li><a href="{% url 'observe_adv_list' %}">ADV一览</a></li>
+        <li><a href="{% url 'observe_club_list' %}">社团一览</a></li>
+    </ul>
+    <p>
+        <a href="/logout/">登出</a>
+    </p>
+
+    <!-- Custom cursor element -->
+    <div class="cursor"></div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript for custom cursor
+        const cursor = document.querySelector('.cursor');
+
+        let imgx = 0, imgy = 0;
+        let imgl = 0, imgt = 0;
+        let index = 0;
+
+        document.addEventListener('mousemove', function (e) {
+            imgx = e.clientX - cursor.offsetLeft - cursor.clientWidth / 2;
+            imgy = e.clientY - cursor.offsetTop - cursor.clientHeight / 2;
+            index = 0;
+        });
+
+        setInterval(() => {
+            if (index < 50) {
+                imgl += imgx / 50;
+                imgt += imgy / 50;
+            }
+            cursor.style.left = imgl + 'px';
+            cursor.style.top = imgt + 'px';
+        }, 10);
+    </script>
+</body>
+</html>

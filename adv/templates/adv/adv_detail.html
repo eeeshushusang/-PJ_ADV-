@@ -1,0 +1,103 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% static 'adv/css/comments.css' %}" rel="stylesheet" />
+  <style>
+    body {
+      overflow-y: auto; /* Ensure vertical scroll */
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 50px;
+      max-width: 1000px; /* Add a maximum width to center content */
+      margin-left: auto; /* Center horizontally */
+      margin-right: auto; /* Center horizontally */
+      overflow: auto; /* Ensure container can scroll if content overflows */
+    }
+    .img-thumbnail {
+      border-radius: 15px;
+    }
+    .cursor {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      background-image: url("{% static 'goat1.gif' %}");
+      background-size: cover;
+      pointer-events: none;
+      z-index: 1000;
+      transition: width 0.2s, height 0.2s;
+    }
+  </style>
+  <title>{{ adv.title }} 详情</title>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center">{{ adv.title }}</h1>
+  <p class="text-center">发布日期：{{ adv.pub_date }}</p>
+  <p class="text-center">价格：{{ adv.price }}</p>
+  <p class="text-center">平台：{{ adv.platform }}</p>
+  <p class="text-center">评分：{{ adv.rate }}</p>
+  <div class="text-center">
+    <img src="{{ adv.photo.url }}" alt="{{ adv.title }}" class="img-fluid mb-3" style="max-width: 300px;">
+  </div>
+
+  <h2 class="mt-4">所属社团</h2>
+  <a href="{% url 'club_detail' adv.club.name %}" class="d-flex align-items-center mb-3">
+    <img src="{{ adv.club.photo.url }}" alt="{{ adv.club.name }}" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">
+    <p class="ml-2">{{ adv.club.name }}</p>
+  </a>
+
+  <h2>评论</h2>
+  <ul>
+      {% for comment in comments %}
+      <li>{{ comment.user.name }} ：{{ comment.comments.char_part }} (评分: {{ comment.comments.decimal_part }})</li>
+      {% empty %}
+      <li>此ADV暂无评论。</li>
+      {% endfor %}
+  </ul>
+  <div class="text-center mt-4">
+    <a href="/index/" class="btn btn-primary">返回首页</a>
+  </div>
+</div>
+
+<!-- Custom cursor element -->
+<div class="cursor"></div>
+
+<!-- Optional JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    // JavaScript for custom cursor
+    const cursor = document.querySelector('.cursor');
+
+    let imgx = 0, imgy = 0;
+    let imgl = 0, imgt = 0;
+    let index = 0;
+
+    document.addEventListener('mousemove', function (e) {
+        imgx = e.clientX - cursor.offsetLeft - cursor.clientWidth / 2;
+        imgy = e.clientY - cursor.offsetTop - cursor.clientHeight / 2;
+        index = 0;
+    });
+
+    setInterval(() => {
+        if (index < 50) {
+            imgl += imgx / 50;
+            imgt += imgy / 50;
+        }
+        cursor.style.left = imgl + 'px';
+        cursor.style.top = imgt + 'px';
+    }, 10);
+</script>
+</body>
+</html>
