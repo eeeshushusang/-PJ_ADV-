@@ -17,21 +17,21 @@
         2.2为每个页面添加了独特的bgm.其中每个社团的bgm都是该社灵魂bgm，每个Adv同理。
 
 ## 项目网页：
-http://49.235.184.91/index/
-http://www.adv.xn--6qq986b3xl/index/
-项目github:
-https://github.com/eeeshushusang/-PJ_ADV-
+- http://49.235.184.91/index/
+- http://www.adv.xn--6qq986b3xl/index/
+- 项目github:
+ https://github.com/eeeshushusang/-PJ_ADV-
 
 ## 后端：
 galgame信息：
 wiki;CNGAL;DLsite;Steam;
 
 ## 前端：
-live2d最简单的抄法：
+- live2d最简单的抄法：
 https://github.com/stevenjoezhang/live2d-widget
-登陆,注册，上传信息等页面样式参考：
+- 登陆,注册，上传信息等页面样式参考：
 https://www.bilibili.com/video/BV1X3411y7of/?spm_id_from=333.880.my_history.page.click&vd_source=efbe71818b8135cefb115ae13d27eec1
-山羊鼠标样式：
+- 山羊鼠标样式：
 https://www.bilibili.com/video/BV1wb4y1a7uQ/?spm_id_from=333.880.my_history.page.click
 
 ### 图片：
