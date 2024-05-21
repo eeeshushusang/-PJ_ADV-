@@ -17,9 +17,10 @@
         2.2为每个页面添加了独特的bgm.其中每个社团的bgm都是该社灵魂bgm，每个Adv同理。
 
 ## 项目网页：
+报备不一定过，直连是可以的。
 - http://49.235.184.91/index/
 - http://www.adv.xn--6qq986b3xl/index/
-- 项目github:
+- 项目github: 
  https://github.com/eeeshushusang/-PJ_ADV-
 
 ## 后端：
