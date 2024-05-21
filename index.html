@@ -8,25 +8,10 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'adv/css/comments.css' %}" rel="stylesheet" />
+    <link href="{% static 'adv/css/index.css' %}" rel="stylesheet" />
+    <link href="{% static 'adv/css/music.css' %}" rel="stylesheet" />
+
     <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
-    <style>
-        body {
-            overflow-y: auto;
-        }
-
-        .cursor {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            background-image: url("{% static 'goat1.gif' %}");
-            background-size: cover;
-            pointer-events: none;
-            z-index: 1000;
-            transition: width 0.2s, height 0.2s;
-        }
-    </style>
-
     <title>首页</title>
 </head>
 <body>
@@ -45,10 +30,26 @@
     <!-- Custom cursor element -->
     <div class="cursor"></div>
 
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="track-info" id="track-info">MANYO,三輪学 - 黑猫さんの背伸び.mp3</div>
+        <audio id="background-music" controls loop autoplay>
+            <source src="{% static 'adv/bgm/MANYO,三輪学 - 黑猫さんの背伸び.mp3' %}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="controls">
+            <button id="play-pause">播放/暂停</button>
+            <div class="volume-slider">
+                音量: <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.5">
+            </div>
+        </div>
+    </div>
+
     <!-- Optional JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'adv/js/music.js' %}"></script>
     <script>
         // JavaScript for custom cursor
         const cursor = document.querySelector('.cursor');
@@ -71,6 +72,25 @@
             cursor.style.left = imgl + 'px';
             cursor.style.top = imgt + 'px';
         }, 10);
+
+        // JavaScript for music player
+        const audioElement = document.getElementById('background-music');
+        const playPauseButton = document.getElementById('play-pause');
+        const volumeControl = document.getElementById('volume-control');
+
+        playPauseButton.addEventListener('click', () => {
+            if (audioElement.paused) {
+                audioElement.play();
+                playPauseButton.textContent = '暂停';
+            } else {
+                audioElement.pause();
+                playPauseButton.textContent = '播放';
+            }
+        });
+
+        volumeControl.addEventListener('input', (e) => {
+            audioElement.volume = e.target.value;
+        });
     </script>
 </body>
 </html>

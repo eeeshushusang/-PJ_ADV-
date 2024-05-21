@@ -1,0 +1,76 @@
+body {
+  height: 100vh; /* 覆盖全屏 */
+  background: url('../image/bg2.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #3f3f3f; /* 更亮的文字颜色以提高可读性 */
+  font-family: 'Roboto', sans-serif;
+}
+
+ul {
+  list-style: none; /* 移除默认列表符号 */
+  padding: 0;
+}
+
+li {
+  margin: 10px 0; /* 增加列表项间的间距 */
+}
+
+a {
+  background-color: rgba(255, 255, 255, 0.8); /* 半透明背景提升可读性 */
+  color: #0056b3; /* 蓝色文字提供足够对比 */
+  padding: 8px 16px; /* 减少内边距大小 */
+  border-radius: 15px; /* 减小圆角大小 */
+  text-decoration: none;
+  transition: background-color 0.3s ease; /* 平滑过渡效果 */
+  display: inline-block; /* 确保可以应用边距和大小调整 */
+  margin: 5px; /* 调整间距以防重叠 */
+}
+
+a:hover {
+  background-color: rgba(255, 255, 255, 1); /* 鼠标悬停时背景色更白 */
+}
+
+h1 {
+  color: #ffffff; /* 标题使用白色字体 */
+  text-shadow: 2px 2px 4px #000000; /* 文字阴影增加可读性 */
+  margin-bottom: 20px; /* 增加与下方元素的间距 */
+}
+
+.cursor {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-image: url("../image/goat1.gif");
+  background-size: cover;
+  pointer-events: none;
+  z-index: 1000;
+  transition: width 0.2s, height 0.2s;
+}
+
+/* 音乐播放器样式 */
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.track-info {
+  margin-bottom: 10px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.volume-slider {
+  margin-left: 10px;
+}

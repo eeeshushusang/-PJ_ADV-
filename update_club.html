@@ -9,7 +9,7 @@
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="{% static 'adv/css/update_club.css' %}" rel="stylesheet" />
-
+  <link href="{% static 'adv/css/music.css' %}" rel="stylesheet" />
   <title>上传新的社团信息</title>
 </head>
 <body>
@@ -49,7 +49,20 @@
 
   <!-- Custom cursor element -->
   <div class="cursor"></div>
-
+<!-- Music Player -->
+<div class="music-player">
+  <div class="track-info" id="track-info">MANYO, 三輪学 - 黑猫さんの背伸び</div>
+  <audio id="background-music" controls loop autoplay>
+      <source src="{% static 'adv/bgm/MANYO,三輪学 - 黑猫さんの背伸び.mp3' %}" type="audio/mpeg">
+      Your browser does not support the audio element.
+  </audio>
+  <div class="controls">
+      <button id="play-pause">播放/暂停</button>
+      <div class="volume-slider">
+          音量: <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.5">
+      </div>
+  </div>
+</div>
   <!-- Optional JavaScript -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

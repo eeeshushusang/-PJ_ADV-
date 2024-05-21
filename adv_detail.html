@@ -9,6 +9,7 @@
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="{% static 'adv/css/comments.css' %}" rel="stylesheet" />
+  <link href="{% static 'adv/css/music.css' %}" rel="stylesheet" />
   <style>
     body {
       overflow-y: auto; /* Ensure vertical scroll */
@@ -35,6 +36,11 @@
       pointer-events: none;
       z-index: 1000;
       transition: width 0.2s, height 0.2s;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
   </style>
   <title>{{ adv.title }} 详情</title>
@@ -64,18 +70,35 @@
       <li>此ADV暂无评论。</li>
       {% endfor %}
   </ul>
-  <div class="text-center mt-4">
+  <div class="button-container mt-4">
     <a href="/index/" class="btn btn-primary">返回首页</a>
+    <a href="/comments/" class="btn btn-primary">发布评价</a>
   </div>
 </div>
 
 <!-- Custom cursor element -->
 <div class="cursor"></div>
 
+<!-- Music Player -->
+<div class="music-player">
+  <div class="track-info" id="track-info">{{ bgm|cut:"adv/bgm/"|cut:".mp3" }}</div>
+  <audio id="background-music" controls loop autoplay>
+      <source src="{% static bgm %}" type="audio/mpeg">
+      Your browser does not support the audio element.
+  </audio>
+  <div class="controls">
+      <button id="play-pause">播放/暂停</button>
+      <div class="volume-slider">
+          音量: <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.5">
+      </div>
+  </div>
+</div>
+
 <!-- Optional JavaScript -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.amazonaws.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="{% static 'adv/js/music.js' %}"></script>
 <script>
     // JavaScript for custom cursor
     const cursor = document.querySelector('.cursor');
@@ -98,6 +121,31 @@
         cursor.style.left = imgl + 'px';
         cursor.style.top = imgt + 'px';
     }, 10);
+
+    // JavaScript for music player
+    const audioElement = document.getElementById('background-music');
+    const playPauseButton = document.getElementById('play-pause');
+    const volumeControl = document.getElementById('volume-control');
+    const trackInfo = document.getElementById('track-info');
+
+    playPauseButton.addEventListener('click', () => {
+        if (audioElement.paused) {
+            audioElement.play();
+            playPauseButton.textContent = '暂停';
+        } else {
+            audioElement.pause();
+            playPauseButton.textContent = '播放';
+        }
+    });
+
+    volumeControl.addEventListener('input', (e) => {
+        audioElement.volume = e.target.value;
+    });
+
+    // Update track info
+    audioElement.addEventListener('loadedmetadata', () => {
+        trackInfo.textContent = "{{ bgm|cut:"adv/bgm/"|cut:".mp3" }}";
+    });
 </script>
 </body>
 </html>

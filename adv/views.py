@@ -205,7 +205,28 @@ def adv_list(request):
 def adv_detail(request, adv_title):
     adv = get_object_or_404(Adv, title=adv_title)
     comments = Comments.objects.filter(adv=adv).select_related('user')  # 确保包括关联的用户信息
-    return render(request, 'adv_detail.html', {'adv': adv, 'comments': comments})
+    # 根据 ADV 的标题设置对应的 BGM
+    bgm_files = {
+        "高考恋爱一百天": "adv/bgm/Days - Nuit Silencieuse.mp3",
+        "Summer Pockets": "adv/bgm/麻枝准 - Sea, You & Me.mp3",
+        "樱之刻  在樱花之森下漫步": "adv/bgm/松本文紀 - 櫻ノ詩 -2023Mix inst ver-.mp3",
+        "樱之诗  在樱花之森上飞舞": "adv/bgm/松本文紀 - 夢の歩みを見上げて.mp3",
+        "战国兰斯": "adv/bgm/アリスソフト - My Glorious Days.mp3",
+        "兰斯10 决战": "adv/bgm/アリスソフト - the end.mp3",
+        "White Album": "adv/bgm/石川真也 - FILL YOU.mp3",
+        "White Album2": "adv/bgm/石川真也 - あの頃のように.mp3",
+        "Clannad": "adv/bgm/麻枝准 - 同じ高みへ.mp3"
+
+    }
+    bgm_file = bgm_files.get(adv.title, "默认 BGM 文件路径")
+
+    context = {
+        'adv': adv,
+        'comments': comments,
+        'bgm': bgm_file
+    }
+    return render(request, 'adv_detail.html', context)
+
 
 
 def club_list(request):
@@ -215,5 +236,22 @@ def club_list(request):
 
 def club_detail(request, club_name):
     club = get_object_or_404(Club, name=club_name)
-    advs = Adv.objects.filter(club=club)  # 获取以该社团为外键的所有Adv
-    return render(request, 'club_detail.html', {'club': club, 'advs': advs})
+    advs = Adv.objects.filter(club=club)
+
+    # 根据 club 的名称设置对应的 BGM
+    bgm_files = {
+        "Key": "adv/bgm/麻枝准,Key Sounds Label - 渚.mp3",
+        "Leaf": "adv/bgm/上原れな - 届かない恋 (Instrumental).mp3",
+        "橘子班": "adv/bgm/Days - Nuit Silencieuse.mp3",
+        "AliceSoft": "adv/bgm/アリスソフト - かわいいのでてきた.mp3",
+        "枕": "adv/bgm/松本文紀 - 夜の向日葵.mp3",
+    }
+    bgm_file = bgm_files.get(club.name, "默认 BGM 文件路径")
+
+    context = {
+        'club': club,
+        'advs': advs,
+        'bgm': bgm_file
+    }
+    return render(request, 'club_detail.html', context)
+
