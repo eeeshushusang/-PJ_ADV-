@@ -8,101 +8,45 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'adv/css/comments.css' %}" rel="stylesheet" />
-
-    <style>
-        body {
-            overflow-y: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 300px;
-            width: 100%;
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-        .form-login h3 {
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        .form-group label {
-            color: #fff;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            width: 100%;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-        .text-success ins {
-            color: #28a745;
-        }
-        .text-success ins:hover {
-            text-decoration: none;
-        }
-        .form-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .cursor {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            background-image: url("{% static 'goat1.gif' %}");
-            background-size: cover;
-            pointer-events: none;
-            z-index: 1000;
-            transition: width 0.2s, height 0.2s;
-        }
-    </style>
-
+    <link href="{% static 'adv/css/login.css' %}" rel="stylesheet">
     <title>登录</title>
 </head>
 <body>
 
-<div class="container">
-    <form class="form-login" action="/login/" method="post">
+<div class="box">
+    <div class="left"></div>
+    <div class="right">
+        <h4>登录</h4>
+        <form class="form-login" action="/login/" method="post">
 
-        {% if login_form.captcha.errors %}
-            <div class="alert alert-warning">{{ login_form.captcha.errors }}</div>
-        {% elif message %}
-            <div class="alert alert-warning">{{ message }}</div>
-        {% endif %}
+            {% if login_form.captcha.errors %}
+                <div class="alert alert-warning">{{ login_form.captcha.errors }}</div>
+            {% elif message %}
+                <div class="alert alert-warning">{{ message }}</div>
+            {% endif %}
 
-        {% csrf_token %}
+            {% csrf_token %}
 
-        <h3 class="text-center">欢迎登录</h3>
+            <div class="form-group">
+                {{ login_form.username.label_tag }}
+                {{ login_form.username }}
+            </div>
+            <div class="form-group">
+                {{ login_form.password.label_tag }}
+                {{ login_form.password }}
+            </div>
+            <div class="form-group">
+                {{ login_form.captcha.label_tag }}
+                {{ login_form.captcha }}
+            </div>
 
-        <div class="form-group">
-            {{ login_form.username.label_tag }}
-            {{ login_form.username }}
-        </div>
-        <div class="form-group">
-            {{ login_form.password.label_tag }}
-            {{ login_form.password }}
-        </div>
-        <div class="form-group">
-            {{ login_form.captcha.label_tag }}
-            {{ login_form.captcha }}
-        </div>
-
-        <div class="form-footer">
-            <a href="/register/" class="text-success"><ins>注册</ins></a>
-            <button type="submit" class="btn btn-primary">登录</button>
-        </div>
-    </form>
-</div> <!-- /container -->
+            <div class="form-footer">
+                <button type="submit" class="btn btn-primary submit">登录</button>
+                <a href="/register/" class="text-success"><ins>注册</ins></a>
+            </div>
+        </form>
+    </div>
+</div>
 
 <!-- Custom cursor element -->
 <div class="cursor"></div>

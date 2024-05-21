@@ -8,86 +8,44 @@
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-  <link href="{% static 'adv/css/comments.css' %}" rel="stylesheet" />
-
-  <style>
-    body {
-      overflow-y: auto;
-    }
-    .container {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      border-radius: 15px;
-      margin-top: 50px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      color: #fff;
-    }
-    .form-register h3 {
-      margin-bottom: 20px;
-      color: #fff;
-    }
-    .form-group label {
-      color: #fff;
-    }
-    .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
-    }
-    .btn-primary:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-    }
-    .btn-secondary {
-      background-color: #6c757d;
-      border-color: #6c757d;
-    }
-    .btn-secondary:hover {
-      background-color: #5a6268;
-      border-color: #545b62;
-    }
-    .cursor {
-      width: 50px;
-      height: 50px;
-      position: absolute;
-      background-image: url("{% static 'goat1.gif' %}");
-      background-size: cover;
-      pointer-events: none;
-      z-index: 1000;
-      transition: width 0.2s, height 0.2s;
-    }
-  </style>
+  <link href="{% static 'adv/css/comments1.css' %}" rel="stylesheet" />
 
   <title>评价ADV</title>
 </head>
 <body>
-  <div class="container">
-    <form class="form-register" action="{% url 'comments' %}" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <h3 class="text-center">评价ADV</h3>
+  <div class="box">
+    <div class="left"></div>
+    <div class="right">
+      <h4>评价ADV</h4>
+      <form class="form-comments" action="{% url 'comments' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
-      {% if message %}
-        <div class="alert alert-warning">{{ message }}</div>
-      {% endif %}
+        {% if message %}
+          <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
 
-      <div class="form-group">
-        {{ comments_form.adv.label_tag }}
-        {{ comments_form.adv }}
-      </div>
-      <div class="form-group">
-        {{ comments_form.decimal_part.label_tag }}
-        {{ comments_form.decimal_part }}
-      </div>
-      <div class="form-group">
-        {{ comments_form.char_part.label_tag }}
-        {{ comments_form.char_part }}
-      </div>
+        <div class="form-group">
+          {{ comments_form.adv.label_tag }}
+          {{ comments_form.adv }}
+        </div>
+        <div class="form-group">
+          {{ comments_form.decimal_part.label_tag }}
+          {{ comments_form.decimal_part }}
+        </div>
+        <div class="form-group">
+          {{ comments_form.char_part.label_tag }}
+          {{ comments_form.char_part }}
+        </div>
 
-      <button type="submit" class="btn btn-primary float-right">上传</button>
-    </form>
-    <a href="{% url 'index' %}" class="btn btn-secondary mt-3">返回首页</a>
-  </div> <!-- /container -->
+        <div class="form-footer">
+          <div class="button-container">
+            <a href="{% url 'index' %}" class="btn btn-secondary return-button">返回首页</a>
+            <button type="submit" class="btn btn-primary upload-button">上传</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Custom cursor element -->
   <div class="cursor"></div>
@@ -95,7 +53,7 @@
   <!-- Optional JavaScript -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.amazonaws.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script>
     // JavaScript for custom cursor
     const cursor = document.querySelector('.cursor');
