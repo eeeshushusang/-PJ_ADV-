@@ -1,0 +1,139 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'adv/css/comments.css' %}" rel="stylesheet" />
+
+    <style>
+        body {
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 300px;
+            width: 100%;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .form-login h3 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .form-group label {
+            color: #fff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .text-success ins {
+            color: #28a745;
+        }
+        .text-success ins:hover {
+            text-decoration: none;
+        }
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cursor {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-image: url("{% static 'goat1.gif' %}");
+            background-size: cover;
+            pointer-events: none;
+            z-index: 1000;
+            transition: width 0.2s, height 0.2s;
+        }
+    </style>
+
+    <title>登录</title>
+</head>
+<body>
+
+<div class="container">
+    <form class="form-login" action="/login/" method="post">
+
+        {% if login_form.captcha.errors %}
+            <div class="alert alert-warning">{{ login_form.captcha.errors }}</div>
+        {% elif message %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
+
+        {% csrf_token %}
+
+        <h3 class="text-center">欢迎登录</h3>
+
+        <div class="form-group">
+            {{ login_form.username.label_tag }}
+            {{ login_form.username }}
+        </div>
+        <div class="form-group">
+            {{ login_form.password.label_tag }}
+            {{ login_form.password }}
+        </div>
+        <div class="form-group">
+            {{ login_form.captcha.label_tag }}
+            {{ login_form.captcha }}
+        </div>
+
+        <div class="form-footer">
+            <a href="/register/" class="text-success"><ins>注册</ins></a>
+            <button type="submit" class="btn btn-primary">登录</button>
+        </div>
+    </form>
+</div> <!-- /container -->
+
+<!-- Custom cursor element -->
+<div class="cursor"></div>
+
+<!-- Optional JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/umd/popper.min.js"></script>
+<script src="https://stackpath.amazonaws.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    // JavaScript for custom cursor
+    const cursor = document.querySelector('.cursor');
+
+    let imgx = 0, imgy = 0;
+    let imgl = 0, imgt = 0;
+    let index = 0;
+
+    document.addEventListener('mousemove', function (e) {
+        imgx = e.clientX - cursor.offsetLeft - cursor.clientWidth / 2;
+        imgy = e.clientY - cursor.offsetTop - cursor.clientHeight / 2;
+        index = 0;
+    });
+
+    setInterval(() => {
+        if (index < 50) {
+            imgl += imgx / 50;
+            imgt += imgy / 50;
+        }
+        cursor.style.left = imgl + 'px';
+        cursor.style.top = imgt + 'px';
+    }, 10);
+</script>
+</body>
+</html>

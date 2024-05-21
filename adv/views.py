@@ -9,7 +9,6 @@ from django.shortcuts import redirect
 from . import forms
 from . import models
 import hashlib
-from django.contrib.auth.decorators import login_required
 
 
 def hash_code(s, salt='pj_adv'):
@@ -26,7 +25,7 @@ class AdvViewSet(viewsets.ModelViewSet):
 
 def index(request):
     pass
-    return render(request, 'adv/index.html')
+    return render(request, 'index.html')
 
 
 def login(request):
@@ -43,7 +42,7 @@ def login(request):
                 user = User.objects.get(name=username)
             except User.DoesNotExist:
                 message = '用户不存在！'
-                return render(request, 'adv/login.html', locals())
+                return render(request, 'login.html', locals())
 
             if user.password == password:
                 request.session['is_login'] = True
@@ -55,12 +54,12 @@ def login(request):
                 return redirect(next_url)
             else:
                 message = '密码不正确！'
-                return render(request, 'adv/login.html', locals())
+                return render(request, 'login.html', locals())
         else:
-            return render(request, 'adv/login.html', locals())
+            return render(request, 'login.html', locals())
 
     login_form = LoginForm()
-    return render(request, 'adv/login.html', locals())
+    return render(request, 'login.html', locals())
 
 
 def register(request):
@@ -80,12 +79,12 @@ def register(request):
 
             if password1 != password2:
                 message = '两次输入的密码不同！'
-                return render(request, 'adv/register.html', locals())
+                return render(request, 'register.html', locals())
             else:
                 same_name_user = models.User.objects.filter(name=username)
                 if same_name_user:
                     message = '用户名已经存在'
-                    return render(request, 'adv/register.html', locals())
+                    return render(request, 'register.html', locals())
                 new_user = models.User()
                 new_user.name = username
                 new_user.password = hash_code(password1)
@@ -96,9 +95,9 @@ def register(request):
                 return redirect('/login/')  # 注册成功，重定向到登录页面
 
         else:
-            return render(request, 'adv/register.html', locals())
+            return render(request, 'register.html', locals())
     register_form = forms.RegisterForm()
-    return render(request, 'adv/register.html', locals())
+    return render(request, 'register.html', locals())
 
 
 def logout(request):
@@ -123,7 +122,7 @@ def update_club(request):  # 上传某club信息
             same_name_user = models.Club.objects.filter(name=username)
             if same_name_user:
                 message = '该社团名已经存在，请选择其他名称'
-                return render(request, 'adv/update_club.html', locals())
+                return render(request, 'update_club.html', locals())
             new_Club = models.Club()
             new_Club.name = username
             new_Club.pub_date = pub_date
@@ -131,9 +130,9 @@ def update_club(request):  # 上传某club信息
             new_Club.save()
             return redirect('/index/')  # 上传成功
         else:
-            return render(request, 'adv/update_club.html', locals())
+            return render(request, 'update_club.html', locals())
     club_update_form = forms.ClubUpdateForm()
-    return render(request, 'adv/update_club.html', locals())
+    return render(request, 'update_club.html', locals())
 
 
 def update_adv(request):
@@ -151,7 +150,7 @@ def update_adv(request):
             same_title_adv = models.Adv.objects.filter(title=title)
             if same_title_adv.exists():
                 message = '该ADV名已经存在，请选择其他名称'
-                return render(request, 'adv/update_adv.html', locals())
+                return render(request, 'update_adv.html', locals())
 
             new_adv = models.Adv(
                 club=club,
@@ -165,10 +164,10 @@ def update_adv(request):
             return redirect('/index/')  # 上传成功
 
         else:
-            return render(request, 'adv/update_adv.html', locals())
+            return render(request, 'update_adv.html', locals())
 
     adv_form = forms.AdvUpdateForm()
-    return render(request, 'adv/update_adv.html', locals())
+    return render(request, 'update_adv.html', locals())
 
 
 # TODO
@@ -180,7 +179,7 @@ def comments(request):
             user_name = request.session.get('user_name')
             if not user_name:
                 message = "用户未登录或未找到"
-                return render(request, 'adv/comments.html', {'comments_form': comments_form, 'message': message})
+                return render(request, 'comments.html', {'comments_form': comments_form, 'message': message})
             user = get_object_or_404(User, name=user_name)
             comment.user = user
             composite_value = CompositeValue(
@@ -192,29 +191,29 @@ def comments(request):
             return redirect('/index/')
         else:
             message = "表单验证失败，请检查填写内容。"
-            return render(request, 'adv/comments.html', {'comments_form': comments_form, 'message': message})
+            return render(request, 'comments.html', {'comments_form': comments_form, 'message': message})
     else:
         comments_form = CommentsForm()
-        return render(request, 'adv/comments.html', {'comments_form': comments_form})
+        return render(request, 'comments.html', {'comments_form': comments_form})
 
 
 def adv_list(request):
     advs = Adv.objects.all()
-    return render(request, 'adv/adv_list.html', {'advs': advs})
+    return render(request, 'adv_list.html', {'advs': advs})
 
 
 def adv_detail(request, adv_title):
     adv = get_object_or_404(Adv, title=adv_title)
     comments = Comments.objects.filter(adv=adv).select_related('user')  # 确保包括关联的用户信息
-    return render(request, 'adv/adv_detail.html', {'adv': adv, 'comments': comments})
+    return render(request, 'adv_detail.html', {'adv': adv, 'comments': comments})
 
 
 def club_list(request):
     clubs = Club.objects.all()
-    return render(request, 'adv/club_list.html', {'clubs': clubs})
+    return render(request, 'club_list.html', {'clubs': clubs})
 
 
 def club_detail(request, club_name):
     club = get_object_or_404(Club, name=club_name)
     advs = Adv.objects.filter(club=club)  # 获取以该社团为外键的所有Adv
-    return render(request, 'adv/club_detail.html', {'club': club, 'advs': advs})
+    return render(request, 'club_detail.html', {'club': club, 'advs': advs})

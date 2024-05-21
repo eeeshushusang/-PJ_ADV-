@@ -1,0 +1,139 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% static 'adv/css/comments.css' %}" rel="stylesheet" />
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
+    .container {
+      min-height: calc(100vh - 40px);
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .header-title {
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .adv-item {
+      margin-bottom: 20px;
+    }
+    .adv-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .adv-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+      margin: 10px 0;
+    }
+    .btn-primary {
+      display: block;
+      margin: 0 auto;
+      background-color: #28a745;
+      border: none;
+    }
+    .card {
+      border: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      height: 270px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card-body {
+      text-align: center;
+      padding: 5px 0;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .cursor {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      background-image: url("{% static 'goat1.gif' %}");
+      background-size: cover;
+      pointer-events: none;
+      z-index: 1000;
+      transition: width 0.2s, height 0.2s;
+    }
+  </style>
+  <title>ADV列表</title>
+</head>
+<body>
+<div class="container">
+  <h1 class="header-title">所有ADV</h1>
+  <div class="row">
+    {% for adv in advs %}
+    <div class="col-md-4 adv-item">
+      <div class="card" onclick="location.href='{% url 'adv_detail' adv.title %}'">
+        <img src="{{ adv.photo.url }}" class="card-img-top adv-img" alt="{{ adv.title }}">
+        <div class="card-body">
+          <h5 class="card-title adv-title">{{ adv.title }}</h5>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="footer">
+    <a href="/index/" class="btn btn-primary">返回首页</a>
+  </div>
+</div>
+
+<!-- Custom cursor element -->
+<div class="cursor"></div>
+
+<!-- Optional JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    // JavaScript for custom cursor
+    const cursor = document.querySelector('.cursor');
+
+    let imgx = 0, imgy = 0;
+    let imgl = 0, imgt = 0;
+    let index = 0;
+
+    document.addEventListener('mousemove', function (e) {
+        imgx = e.clientX - cursor.offsetLeft - cursor.clientWidth / 2;
+        imgy = e.clientY - cursor.offsetTop - cursor.clientHeight / 2;
+        index = 0;
+    });
+
+    setInterval(() => {
+        if (index < 50) {
+            imgl += imgx / 50;
+            imgt += imgy / 50;
+        }
+        cursor.style.left = imgl + 'px';
+        cursor.style.top = imgt + 'px';
+    }, 10);
+</script>
+</body>
+</html>
