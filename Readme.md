@@ -129,7 +129,7 @@ https://www.bilibili.com/video/BV1wb4y1a7uQ/?spm_id_from=333.880.my_history.page
         Summer Pockets:麻枝准 - Sea, You & Me
         Clannad:麻枝准 - 同じ高みへ
 
-#### 4.3部署上线：(工作量20%)   
+### 5.部署上线：(工作量20%)   
 腾讯云：服务器(学生折扣)10r/月;
 域名：首年10元(便宜的中文域名)
 使用nginx绕过域名报备进行上线，非常麻烦，实现了可IP直连访问。
