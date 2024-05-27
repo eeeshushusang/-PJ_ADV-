@@ -102,9 +102,6 @@ if comments_form.is_valid():
 注意，此处我们避免了使用我们定义的User来替代Django默认Usser的做法，那样会过于复杂。
 
 ## 前端：(工作量50%)
-live2d最简单的抄法：
-=======
-## 前端：
 - live2d最简单的抄法：
 https://github.com/stevenjoezhang/live2d-widget
 - 登陆,注册，上传信息等页面样式参考：
