@@ -1,5 +1,4 @@
 # 视觉小说评价系统
-<<<<<<< HEAD
 ## 一.目的和背景
     视觉小说(ADV)是结合了视觉与听觉的第九艺术，在过去数十年内已造就无数经典。
     目前日本有Adv评价网站 批评空间(https://erogamescape.org/~ap2/ero/toukei_kaiseki/)，西方有VNDB(https://vndb.org/).
