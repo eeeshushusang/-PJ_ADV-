@@ -24,7 +24,8 @@ E-R图如下：
 ### 3.物理结构设计
 在本项目中，我们选择使用关系型数据库管理系统(RDBMS)来存储和管理数据。根据每个表的主键和外键设计了相应的索引，以确保数据检索的效率和完整性。
 
-## 二. 系统设计与实现
+## 三. 系统设计与实现
+### 1.功能要求
 #### 基本功能要求:
     1.用户注册和登录
     2.用户添加Adv信息，Club信息。
@@ -37,7 +38,7 @@ E-R图如下：
         2.1看板娘
         2.2为每个页面添加了独特的bgm.其中每个社团的bgm都是该社灵魂bgm，每个Adv同理。
 
-## 项目网页：
+### 2.项目网页：
 主页如图，详细请点开网页，可以ip直连访问。
 ![](index.png)
 http://49.235.184.91/index/
@@ -49,12 +50,12 @@ http://www.adv.xn--6qq986b3xl/index/
 https://github.com/eeeshushusang/-PJ_ADV-
 =======
 
-## 后端：(工作量30%)
+### 3.后端：(工作量30%)
 galgame信息：
 wiki; CNGAL; DLsite; Steam;
 
-### 亮点逻辑：
-#### 用户评论后，自动层层更新相关分数。
+#### 亮点逻辑：
+##### Ⅰ.用户评论后，自动层层更新相关分数。
 ```python
 # 在保存评论时，自动调用相关Adv的保存函数，更新Adv的评分。
 # comments的save函数
@@ -82,7 +83,7 @@ def update_average_rate(self):
 ```
 ![](枕.png)
 ![](Club.png)
-####  评论时，默认将使用的用户作为评论者
+#####  Ⅱ.评论时，默认将使用的用户作为评论者
 ```python
 # 相关代码：
 if comments_form.is_valid():
@@ -101,7 +102,7 @@ if comments_form.is_valid():
 ![](Comments.png)
 注意，此处我们避免了使用我们定义的User来替代Django默认Usser的做法，那样会过于复杂。
 
-## 前端：(工作量50%)
+### 4.前端：(工作量50%)
 - live2d最简单的抄法：
 https://github.com/stevenjoezhang/live2d-widget
 - 登陆,注册，上传信息等页面样式参考：
@@ -109,11 +110,11 @@ https://www.bilibili.com/video/BV1X3411y7of/?spm_id_from=333.880.my_history.page
 - 山羊鼠标样式：
 https://www.bilibili.com/video/BV1wb4y1a7uQ/?spm_id_from=333.880.my_history.page.click
 
-### 图片：
+#### 4.1图片：
 -    全局背景：Anmi https://www.pixiv.net/users/212801
 -    部分网页框内背景：Weri https://www.pixiv.net/users/20728711
 
-### 音乐：
+#### 4.2音乐：
 -    首页，上传信息页： MANYO,三輪学 - 黑猫さんの背伸び
 -    橘子班/高考恋爱100天：Days - Nuit Silencieuse    
 -    AliceSoft：アリスソフト - かわいいのでてきた
@@ -129,14 +130,14 @@ https://www.bilibili.com/video/BV1wb4y1a7uQ/?spm_id_from=333.880.my_history.page
         Summer Pockets:麻枝准 - Sea, You & Me
         Clannad:麻枝准 - 同じ高みへ
 
-### 部署上线：(工作量20%)   
+#### 4.3部署上线：(工作量20%)   
 腾讯云：服务器(学生折扣)10r/月;
 域名：首年10元(便宜的中文域名)
 使用nginx绕过域名报备进行上线，非常麻烦，实现了可IP直连访问。
 遗憾的是，域名审批终究没有通过，原因是使用中文域名，无法添加CNAME解析，SSL审核未通过。
 这也告诉我们，做个人网页还是选择海外服务器比较好，可以免去报备域名的工作。
 
-### 后续跟进计划：
+### 四.后续跟进计划：
 - live2d：本打算从BA中扣一个乐队爱丽的小人模型下来，结果发现不会用相关软件，不了了之。
 - 音乐：实现同一曲目在不同网页播放时，继承上个网页的播放进度
 - 鼠标特效可以做的更好看点
