@@ -48,7 +48,6 @@ http://www.adv.xn--6qq986b3xl/index/
 
 项目github:
 https://github.com/eeeshushusang/-PJ_ADV-
-=======
 
 ### 3.后端：(工作量30%)
 galgame信息：
