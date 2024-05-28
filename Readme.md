@@ -57,7 +57,7 @@ E-R图如下：
 http://49.235.184.91/index/
 
 http://www.adv.xn--6qq986b3xl/index/
-(域名报备没过....)
+已通过域名报备
 
 项目github:
 https://github.com/eeeshushusang/-PJ_ADV-
@@ -151,7 +151,7 @@ https://www.bilibili.com/video/BV1wb4y1a7uQ/?spm_id_from=333.880.my_history.page
 
 使用nginx绕过域名报备进行上线，非常麻烦，实现了可IP直连访问。
 
-遗憾的是，域名审批终究没有通过，原因是使用中文域名，无法添加CNAME解析，SSL审核未通过。
+同时，即便nginx正常上线后，想要通过域名访问还是需要域名报备，很麻烦。
 
 这也告诉我们，做个人网页还是选择海外服务器比较好，可以免去报备域名的工作。
 
