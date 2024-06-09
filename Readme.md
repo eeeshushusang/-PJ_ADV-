@@ -1,4 +1,5 @@
 # 视觉小说评价系统
+B站视频：https://www.bilibili.com/video/BV1cEGheLEve/?spm_id_from=333.999.0.0
 ## 一.目的和背景
 视觉小说(ADV)是结合了视觉与听觉的第九艺术，在过去数十年内已造就无数经典。
 
